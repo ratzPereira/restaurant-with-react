@@ -3,6 +3,7 @@ import SectionAbout from "./components/Section-About/SectionAbout";
 import { useState } from "react";
 import LoginForm from "./components/Login/LoginForm";
 import RegisterForm from "./components/Registration/RegisterForm";
+import SectionMenu from "./components/Section-Menu/SectionMenu";
 
 function App() {
   const [loginIsShown, setLoginIsShown] = useState(true);
@@ -36,6 +37,7 @@ function App() {
       )}
       <main>
         <SectionAbout />
+        <SectionMenu />
       </main>
     </>
   );
