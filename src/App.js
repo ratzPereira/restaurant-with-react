@@ -9,12 +9,15 @@ import { Route } from "react-router-dom";
 function App() {
   const [loginIsShown, setLoginIsShown] = useState(false);
   const [registerIsShown, setRegisterIsShown] = useState(false);
+  //hardcoded some dummy data to work with if needed
   const [registeredUsers, setRegisterUser] = useState([
     { email: "dummy@data.com", name: "joao", password: "a123" },
   ]);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   localStorage.setItem("registeredUsers", JSON.stringify(registeredUsers));
   const usersInStorage = localStorage.getItem("registeredUsers");
+  console.log(usersInStorage);
 
   const hideLoginHandler = () => {
     setLoginIsShown(false);
@@ -22,6 +25,10 @@ function App() {
 
   const showLoginHandler = () => {
     setLoginIsShown(true);
+  };
+
+  const logoutHandler = () => {
+    setIsLoggedIn(false);
   };
 
   const showRegisterFormHandler = () => {
@@ -46,8 +53,12 @@ function App() {
       <Header
         onShowLoggin={showLoginHandler}
         onShowRegister={showRegisterFormHandler}
+        isLoggedIn={isLoggedIn}
+        onLogout={logoutHandler}
       />
-      {loginIsShown && <LoginForm onHideLogin={hideLoginHandler} />}
+      {loginIsShown && (
+        <LoginForm users={usersInStorage} onHideLogin={hideLoginHandler} />
+      )}
       {registerIsShown && (
         <RegisterForm
           onHideRegister={hideRegisterFormHandler}

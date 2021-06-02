@@ -27,7 +27,7 @@ const RegisterForm = (props) => {
   };
 
   const validateNameHandler = () => {
-    setNameIsValid(enteredName.trim().length > 4);
+    setNameIsValid(enteredName.trim().length > 1);
   };
 
   const passwordHandler = (event) => {
@@ -40,10 +40,11 @@ const RegisterForm = (props) => {
 
   const submitRegisterHandler = (event) => {
     event.preventDefault();
-
+    console.log("WQ");
     if (nameIsValid && passwordIsValid && emailIsValid) {
       props.onRegister(enteredEmail, enteredName, enteredPassword);
       props.onHideRegister();
+      console.log("WQ");
     }
   };
 
