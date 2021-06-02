@@ -2,7 +2,6 @@ import { plates } from "../../assets/Data";
 import MenuItem from "./MenuItem";
 import Card from "../UI/Card/Card";
 import styles from "./SectionMenu.module.css";
-import Modal from "../UI/Modal";
 
 const plateList = plates.map((item) => (
   <MenuItem

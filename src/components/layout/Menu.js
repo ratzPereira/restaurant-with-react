@@ -1,10 +1,12 @@
-import styles from "./Menu.module.css";
-import Button from "../UI/Button";
+import styles from "../UI/Button.module.css";
+import { Link } from "react-router-dom";
 
 const Menu = () => {
   return (
     <div>
-      <Button>Menu</Button>
+      <Link className={styles.button} to="/menu">
+        Menu
+      </Link>
     </div>
   );
 };
