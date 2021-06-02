@@ -14,6 +14,7 @@ function App() {
   ]);
 
   localStorage.setItem("registeredUsers", JSON.stringify(registeredUsers));
+  const usersInStorage = localStorage.getItem("registeredUsers");
 
   const hideLoginHandler = () => {
     setLoginIsShown(false);
