@@ -1,19 +1,26 @@
 import Header from "./components/layout/Header";
 import SectionAbout from "./components/Section-About/SectionAbout";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import LoginForm from "./components/Login/LoginForm";
 import RegisterForm from "./components/Registration/RegisterForm";
 import SectionMenu from "./components/Section-Menu/SectionMenu";
 import { Route } from "react-router-dom";
 
 function App() {
-  const [loginIsShown, setLoginIsShown] = useState(false);
-  const [registerIsShown, setRegisterIsShown] = useState(false);
   //hardcoded some dummy data to work with if needed
   const [registeredUsers, setRegisterUser] = useState([
     { email: "dummy@data.com", name: "joao", password: "a123" },
   ]);
+  const [loginIsShown, setLoginIsShown] = useState(false);
+  const [registerIsShown, setRegisterIsShown] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  useEffect(() => {
+    const data = localStorage.getItem("loggedUser");
+    if (data) {
+      setIsLoggedIn(true);
+    }
+  }, []);
 
   localStorage.setItem("registeredUsers", JSON.stringify(registeredUsers));
   const usersInStorage = localStorage.getItem("registeredUsers");
@@ -29,7 +36,7 @@ function App() {
 
   const logoutHandler = () => {
     setIsLoggedIn(false);
-    localStorage.setItem("loggedUser", "");
+    localStorage.setItem("loggedUser", []);
   };
 
   const loginHandler = (user) => {
