@@ -29,6 +29,12 @@ function App() {
 
   const logoutHandler = () => {
     setIsLoggedIn(false);
+    localStorage.setItem("loggedUser", "");
+  };
+
+  const loginHandler = (user) => {
+    setIsLoggedIn(true);
+    localStorage.setItem("loggedUser", JSON.stringify(user));
   };
 
   const showRegisterFormHandler = () => {
@@ -57,7 +63,11 @@ function App() {
         onLogout={logoutHandler}
       />
       {loginIsShown && (
-        <LoginForm users={usersInStorage} onHideLogin={hideLoginHandler} />
+        <LoginForm
+          users={usersInStorage}
+          onHideLogin={hideLoginHandler}
+          isLogged={loginHandler}
+        />
       )}
       {registerIsShown && (
         <RegisterForm

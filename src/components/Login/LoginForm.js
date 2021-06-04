@@ -20,14 +20,18 @@ const LoginForm = (props) => {
   const submitLoginHandler = (event) => {
     event.preventDefault();
     const users = JSON.parse(localStorage.getItem("registeredUsers"));
-    console.log(typeof users);
-    const userFound = users.map(
+
+    const userFound = users.find(
       (user) => user.password === enteredPassword && user.email === enteredEmail
     );
-    console.log(userFound);
+
     if (userFound) {
       setValidCredentials(true);
+      props.isLogged(userFound);
       props.onHideLogin();
+      setValidCredentials(true);
+    } else {
+      setValidCredentials(false);
     }
   };
 
@@ -35,11 +39,19 @@ const LoginForm = (props) => {
     <Modal onClose={props.onHideLogin}>
       <Card className={styles.login}>
         <form onSubmit={submitLoginHandler}>
-          <div className={styles.control}>
+          <div
+            className={`${styles.control} ${
+              validCredentials === false ? styles.invalid : ""
+            }`}
+          >
             <label htmlFor="email">E-mail</label>
             <input type="email" onChange={emailHandler} />
           </div>
-          <div className={styles.control}>
+          <div
+            className={`${styles.control} ${
+              validCredentials === false ? styles.invalid : ""
+            }`}
+          >
             <label htmlFor="password">Password</label>
             <input type="password" onChange={passwordHandler} />
           </div>
